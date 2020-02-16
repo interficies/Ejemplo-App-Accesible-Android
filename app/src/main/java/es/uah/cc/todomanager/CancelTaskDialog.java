@@ -4,16 +4,16 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 
-import es.uah.cc.todomanager.R;
 import es.uah.cc.todomanager.domain.TaskList;
 
 /** A dialog to confirm the cancellation of a task.
  * Created by Fjest on 11/09/2017.
  */
 
-public class CancelTaskDialog extends android.support.v4.app.DialogFragment{
+public class CancelTaskDialog extends DialogFragment {
     private static final String TAG = "CancelTaskDialog";
 
     private TaskList.Task task;

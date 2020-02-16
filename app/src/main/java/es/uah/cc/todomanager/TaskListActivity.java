@@ -5,13 +5,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.support.design.widget.FloatingActionButton;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
+import com.google.firebase.crashlytics.core.CrashlyticsCore;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,7 +26,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import es.uah.cc.todomanager.R;
 import es.uah.cc.todomanager.domain.TaskList;
 
 import java.text.DateFormat;
@@ -59,6 +62,10 @@ public class TaskListActivity extends AppCompatActivity {
      */
     private SharedPreferences.OnSharedPreferenceChangeListener preferenceChangeListener;
 
+    /**
+     * Analytics Object
+     */
+    private FirebaseAnalytics mFirebaseAnalytics;
     /**
      * Filters the task list attending to several preferences.
      * @param source    The original list.
@@ -99,6 +106,9 @@ refreshTasks((RecyclerView) findViewById(R.id.task_list));
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -430,6 +440,7 @@ cancelTask(holder.mItem, position);
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
         switch (requestCode) {
             case TaskDetailActivity.ACTIVITY_CODE:
                 if (resultCode == TaskDetailActivity.CHANGED) {
@@ -459,15 +470,19 @@ updateTask(t, position);
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.settings_option: Intent intent = new Intent(this, SettingsActivity.class);
+            case R.id.settings_option:
+                Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.help_option: Intent helpIntent = new Intent(this, HelpActivity.class);
+            case R.id.help_option:
+                Intent helpIntent = new Intent(this, HelpActivity.class);
                 startActivity(helpIntent);
                 return true;
             case R.id.contact_option: Intent contactIntent = new Intent(this, ContactActivity.class);
                 startActivity(contactIntent);
                 return true;
+            case R.id.force_crash:
+                throw new RuntimeException("El usuario ha decidido Lanzar una excepción");
         }
         return super.onOptionsItemSelected(item);
     }

@@ -2,9 +2,7 @@ package es.uah.cc.todomanager;
 
 import android.app.Activity;
 import java.text.DateFormat;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,7 +12,10 @@ import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import es.uah.cc.todomanager.R;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+
 import es.uah.cc.todomanager.domain.TaskList;
 
 /**

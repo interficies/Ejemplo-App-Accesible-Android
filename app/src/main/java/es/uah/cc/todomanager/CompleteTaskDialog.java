@@ -3,17 +3,19 @@ package es.uah.cc.todomanager;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.NonNull;
 
-import es.uah.cc.todomanager.R;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
+
 import es.uah.cc.todomanager.domain.TaskList;
 
 /**
  * Created by Fjest on 11/09/2017.
  */
 
-public class CompleteTaskDialog extends android.support.v4.app.DialogFragment {
+public class CompleteTaskDialog extends DialogFragment {
     private static final String TAG = "CompleteTaskDialog";
 
     private TaskList.Task task;

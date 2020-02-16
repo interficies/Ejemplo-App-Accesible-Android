@@ -14,5 +14,8 @@
 android:icon="@android:drawable/ic_menu_send"
         android:title="@string/contact"
         android:showAsAction="never" />
+    <item android:id="@+id/force_crash"
+        android:icon="@android:drawable/ic_dialog_alert"
+        android:title="Force Crash"/>
 
 </menu>
