@@ -1,7 +1,5 @@
 package es.uah.cc.todomanager;
 
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,7 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import es.uah.cc.todomanager.R;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
 /**
  * A contact form.
@@ -36,8 +35,8 @@ public class ContactActivityFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.send_button) {
-DialogFragment dialog = new SendMessageDialog((SendMessageDialog.OnSendMessageListener) getActivity());
-dialog.show(getFragmentManager(), "send_confirmation");
+        DialogFragment dialog = new SendMessageDialog((SendMessageDialog.OnSendMessageListener) getActivity());
+        dialog.show(getFragmentManager(), "send_confirmation");
             return true;
         }
         return super.onOptionsItemSelected(item);
